@@ -10,7 +10,7 @@ class Victim:
             self.victim_id = victim_id
         else:
             params = {
-                'victim_id': victim_id,
+                'user_ids': victim_id,
                 'access_token': 'ed1271af9e8883f7a7c2cefbfddfcbc61563029666c487b2f71a5227cce0d1b533c4af4c5b888633c06ae',
                 'v': '5.92',
             }
@@ -20,7 +20,7 @@ class Victim:
 
     def friends(self):
         params = {
-            'victim_id': self.victim_id,
+            'user_id': self.victim_id,
             'access_token': 'ed1271af9e8883f7a7c2cefbfddfcbc61563029666c487b2f71a5227cce0d1b533c4af4c5b888633c06ae',
             'v': '5.92',
             'fields': 'domain'
@@ -34,7 +34,7 @@ class Victim:
 
     def groups(self):
         params = {
-            'victim_id': self.victim_id,
+            'user_id': self.victim_id,
             'extended': '1',
             'access_token': 'ed1271af9e8883f7a7c2cefbfddfcbc61563029666c487b2f71a5227cce0d1b533c4af4c5b888633c06ae',
             'v': '5.92',
@@ -61,12 +61,12 @@ class Group:
             'fields': 'members_count'
         }
         response = requests.get('https://api.vk.com/method/groups.getById', params)
-        group_information = response.json()
-        return group_information
+        group_info = response.json()
+        return group_info
 
 
 def suitable_groups():
-    victim = Victim('171691064')
+    victim = Victim(171691064)
     victim_friends = victim.friends()
     victim_groups = victim.groups()
 
@@ -81,19 +81,19 @@ def suitable_groups():
             print('-')
             time.sleep(0.1)
 
-    suitable_groups = victim_groups.difference(total_set)
-    return suitable_groups
+    suitable = victim_groups.difference(total_set)
+    return suitable
 
 
 def search_results(group_id_, file):
     group_list = []
     for group in group_id_:
         this_group = Group(str(group))
-        group_information = this_group.group_information()
+        group_info = this_group.group_information()
         iter_dict = dict()
 
         try:
-            for item in group_information['response']:
+            for item in group_info['response']:
                 iter_dict['name'] = item['name']
                 iter_dict['gid'] = item['id']
                 iter_dict['members_count'] = item['members_count']
