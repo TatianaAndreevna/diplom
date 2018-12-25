@@ -3,6 +3,10 @@ import json
 import time
 
 
+access_token = 'ed1271af9e8883f7a7c2cefbfddfcbc61563029666c487b2f71a5227cce0d1b533c4af4c5b888633c06ae'
+version = '5.92'
+
+
 class Victim:
 
     def __init__(self, victim_id):
@@ -11,8 +15,8 @@ class Victim:
         else:
             params = {
                 'user_ids': victim_id,
-                'access_token': 'ed1271af9e8883f7a7c2cefbfddfcbc61563029666c487b2f71a5227cce0d1b533c4af4c5b888633c06ae',
-                'v': '5.92',
+                'access_token': access_token,
+                'v': version,
             }
             response = requests.get('https://api.vk.com/method/victims.get', params)
             victim_information = response.json()
@@ -21,8 +25,8 @@ class Victim:
     def friends(self):
         params = {
             'user_id': self.victim_id,
-            'access_token': 'ed1271af9e8883f7a7c2cefbfddfcbc61563029666c487b2f71a5227cce0d1b533c4af4c5b888633c06ae',
-            'v': '5.92',
+            'access_token': access_token,
+            'v': version,
             'fields': 'domain'
         }
         response = requests.get('https://api.vk.com/method/friends.get', params)
@@ -36,8 +40,8 @@ class Victim:
         params = {
             'user_id': self.victim_id,
             'extended': '1',
-            'access_token': 'ed1271af9e8883f7a7c2cefbfddfcbc61563029666c487b2f71a5227cce0d1b533c4af4c5b888633c06ae',
-            'v': '5.92',
+            'access_token': access_token,
+            'v': version,
             'fields': 'members_count'
         }
         response = requests.get('https://api.vk.com/method/groups.get', params)
@@ -56,8 +60,8 @@ class Group:
     def group_information(self):
         params = {
             'group_id': self.group_id,
-            'access_token': 'ed1271af9e8883f7a7c2cefbfddfcbc61563029666c487b2f71a5227cce0d1b533c4af4c5b888633c06ae',
-            'v': '5.92',
+            'access_token': access_token,
+            'v': version,
             'fields': 'members_count'
         }
         response = requests.get('https://api.vk.com/method/groups.getById', params)
@@ -69,7 +73,6 @@ def suitable_groups():
     victim = Victim(171691064)
     victim_friends = victim.friends()
     victim_groups = victim.groups()
-
     total_set = set()
     for friend in victim_friends:
         try:
