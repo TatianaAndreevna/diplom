@@ -70,21 +70,22 @@ class Group:
 
 
 def suitable_groups():
-    victim = Victim(171691064)
+    victim = Victim(139712322)
     victim_friends = victim.friends()
     victim_groups = victim.groups()
     total_set = set()
     for friend in victim_friends:
         time.sleep(0.3)
-        flag = True
-        while flag:
+        attempts = 0
+        while attempts < 5:
             try:
                 i_victim = Victim(str(friend))
                 total_set = total_set.union(i_victim.groups())
                 print('-')
-                flag = False
             except KeyError:
-                print('-')
+                print('+')
+                attempts += 1
+                continue
             break
 
     suitable = victim_groups.difference(total_set)
