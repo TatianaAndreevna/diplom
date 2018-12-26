@@ -85,8 +85,6 @@ def suitable_groups():
                 print('-')
             except KeyError:
                 print('+')
-                continue
-            break
 
     suitable = victim_groups.difference(total_set)
     return suitable
