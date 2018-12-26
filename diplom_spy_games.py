@@ -70,7 +70,7 @@ class Group:
 
 
 def suitable_groups():
-    victim = Victim(139712322)
+    victim = Victim(171691064)
     victim_friends = victim.friends()
     victim_groups = victim.groups()
     total_set = set()
