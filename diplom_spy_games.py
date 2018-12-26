@@ -70,7 +70,7 @@ class Group:
 
 
 def suitable_groups():
-    victim = Victim(171691064)
+    victim = Victim(139712322)
     victim_friends = victim.friends()
     victim_groups = victim.groups()
     total_set = set()
@@ -85,6 +85,7 @@ def suitable_groups():
                 flag = False
             except KeyError:
                 print('-')
+            break
 
     suitable = victim_groups.difference(total_set)
     return suitable
