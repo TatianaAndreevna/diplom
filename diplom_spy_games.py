@@ -78,13 +78,13 @@ def suitable_groups():
         time.sleep(0.3)
         attempts = 0
         while attempts < 5:
+            attempts += 1
             try:
                 i_victim = Victim(str(friend))
                 total_set = total_set.union(i_victim.groups())
                 print('-')
             except KeyError:
                 print('+')
-                attempts += 1
                 continue
             break
 
