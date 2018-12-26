@@ -75,14 +75,16 @@ def suitable_groups():
     victim_groups = victim.groups()
     total_set = set()
     for friend in victim_friends:
-        try:
-            i_victim = Victim(str(friend))
-            total_set = total_set.union(i_victim.groups())
-            print('-')
-            time.sleep(0.1)
-        except KeyError:
-            print('-')
-            time.sleep(0.1)
+        time.sleep(0.3)
+        flag = True
+        while flag:
+            try:
+                i_victim = Victim(str(friend))
+                total_set = total_set.union(i_victim.groups())
+                print('-')
+                flag = False
+            except KeyError:
+                print('-')
 
     suitable = victim_groups.difference(total_set)
     return suitable
